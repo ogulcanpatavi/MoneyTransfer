@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import com.revolut.money_transfer.dto.ErrorVO;
 
+@Provider
 public class TransferCompletionExceptionMapper implements ExceptionMapper<TransferCompletionException>{
 
 	@Override

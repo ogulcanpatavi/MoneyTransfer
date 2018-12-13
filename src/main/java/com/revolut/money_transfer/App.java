@@ -11,6 +11,9 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 import com.revolut.money_transfer.controller.AdminController;
 import com.revolut.money_transfer.controller.TransferController;
+import com.revolut.money_transfer.exception.DataNotAvailableExceptionMapper;
+import com.revolut.money_transfer.exception.InsufficientBalanceExceptionMapper;
+import com.revolut.money_transfer.exception.TransferCompletionExceptionMapper;
 import com.revolut.money_transfer.utilities.DBConnection;
 
 public class App {
@@ -32,7 +35,10 @@ public class App {
 		ServletHolder jerseyServlet = context.addServlet(org.glassfish.jersey.servlet.ServletContainer.class, "/*");
 		jerseyServlet.setInitOrder(0);
 
-		jerseyServlet.setInitParameter("jersey.config.server.provider.classnames", TransferController.class.getCanonicalName() + "," +AdminController.class.getCanonicalName());
+		jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",
+				TransferController.class.getCanonicalName() + "," + AdminController.class.getCanonicalName() + ","
+						+ DataNotAvailableExceptionMapper.class.getCanonicalName() + "," + InsufficientBalanceExceptionMapper.class.getCanonicalName() + ","
+						+ TransferCompletionExceptionMapper.class.getCanonicalName());
 
 		try {
 			jettyServer.start();
@@ -43,7 +49,6 @@ public class App {
 
 	}
 
-	
 	private static void insertData() throws SQLException {
 		Connection connection = DBConnection.getDBConnection();
 		Statement stmt = null;

@@ -49,7 +49,7 @@ public class TransferServiceImpl implements TransferService {
 				errorMessages.add("No Account found: " + mtrequest.getToAcctNum());
 			} else {
 				if (toAcct.getCurrency() != mtrequest.getCurrency()) {
-					errorMessages.add("The account you are transferig funds to only accepts "
+					errorMessages.add("The account you are transferring funds to only accepts "
 							+ Cached.getCurrency(toAcct.getCurrency()) + "(" + toAcct.getCurrency() + ").");
 				} else {
 					cachedAcct.setToAcct(toAcct);
