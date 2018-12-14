@@ -38,8 +38,11 @@ public class FxRatesDAOImpl implements FxRatesDAO{
 			connection.commit();
 		} catch (SQLException e) {
 			LOGGER.warning("Exception Message " + e.getMessage());
-		} catch (Exception e) {
-			LOGGER.warning("Exception Message " + e.getMessage());
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				LOGGER.warning("Exception Message " + e1.getMessage());
+			}
 		} finally {
 			try {
 				connection.close();
